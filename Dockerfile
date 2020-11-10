@@ -3,13 +3,13 @@
 
 FROM node:9.4.0-alpine as client
 #Crear espacio de trabajo
-WORKDIR /usr/app/client/
+WORKDIR /usr/app/cliente/
 #Copiar archivos json al nuevo destino
-COPY client/package*.json ./
+COPY cliente/package*.json ./
 #ejecutar paquete con gestor npm
 RUN npm install -qy
 #Copiar configuracion al destino
-COPY client/ ./
+COPY cliente/ ./
 #Crear contenedor a partir del comando build
 RUN npm run build
 
@@ -20,15 +20,15 @@ FROM node:9.4.0-alpine
 #Crear espacio de trabajo
 WORKDIR /usr/app/
 #Copiar archivos json al nuevo destino
-COPY --from=client /usr/app/client/build/ ./client/build/
+COPY --from=cliente /usr/app/cliente/build/ ./cliente/build/
 #Crear espacio de trabajo
-WORKDIR /usr/app/server/
+WORKDIR /usr/app/servidor/
 #Copiar archivos json al nuevo destino
-COPY server/package*.json ./
+COPY servidor/package*.json ./
 #ejecutar paquete con gestor npm
 RUN npm install -qy
 #Copiar configuracion al destino
-COPY server/ ./
+COPY servidor/ ./
 
 ENV PORT 8000
 

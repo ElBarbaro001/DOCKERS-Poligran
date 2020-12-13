@@ -1,5 +1,5 @@
 
-# Montar servidor Nodejs
+# Montar servidor Nodejs CLIENTE
 
 FROM node:9.4.0-alpine as client
 #Crear espacio de trabajo
@@ -14,7 +14,7 @@ COPY cliente/ ./
 RUN npm run build
 
 
-# Montar servidor Nodejs
+# Montar servidor Nodejs SERVIDOR
 
 FROM node:9.4.0-alpine
 #Crear espacio de trabajo
@@ -29,7 +29,7 @@ COPY servidor/package*.json ./
 RUN npm install -qy
 #Copiar configuracion al destino
 COPY servidor/ ./
-
+#Puerto de escucha
 ENV PORT 8000
 
 EXPOSE 8000
